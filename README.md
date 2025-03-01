@@ -77,41 +77,103 @@ npx sequelize-cli db:seed:undo:all   # ลบข้อมูลที่ Seed �
 ```
 
 ## ตัวอย่าง API Endpoint
-### 1. สร้างบัญชีผู้ใช้
-**POST** `/api/users`
-```json
-{
-  "username": "newuser",
-  "email": "newuser@example.com",
-  "password": "securepassword"
-}
-```
 
-### 2. รับข้อมูล Cryptocurrencies
-**GET** `/api/cryptocurrencies`
-
-### 3. สร้างคำสั่งซื้อขาย
-**POST** `/api/orders`
-```json
-{
-  "userId": 1,
-  "cryptocurrencyId": 1,
-  "orderType": "buy",
-  "amount": 0.5,
-  "price": 49000
-}
-```
-
-### 4. โอนเหรียญไปยังภายนอกระบบ
-**POST** `/api/externalTransfers`
-```json
-{
-  "userId": 1,
-  "walletId": 1,
-  "amount": 0.1,
-  "destinationAddress": "3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5"
-}
-```
+### 🔹 Users
+- **สร้างบัญชีผู้ใช้**  
+  `POST /api/users`
+  ```json
+  {
+    "username": "newuser",
+    "email": "newuser@example.com",
+    "password": "securepassword"
+  }
+  ```
+- **ดึงข้อมูลผู้ใช้ทั้งหมด**  
+  `GET /api/users`
+- **อัปเดตข้อมูลผู้ใช้**  
+  `PUT /api/users/:id`
+  ```json
+  {
+    "username": "updateduser",
+    "email": "updated@example.com"
+  }
+  ```
+- **ลบผู้ใช้**  
+  `DELETE /api/users/:id`
 
 ---
+
+### 🔹 Wallets
+- **สร้าง Wallet**  
+  `POST /api/wallets`
+  ```json
+  {
+    "userId": 1,
+    "cryptocurrencyId": 2,
+    "balance": 5.0
+  }
+  ```
+- **ดึงข้อมูล Wallet ทั้งหมด**  
+  `GET /api/wallets`
+- **อัปเดตยอดเงินใน Wallet**  
+  `PUT /api/wallets/:id`
+  ```json
+  {
+    "balance": 10.5
+  }
+  ```
+- **ลบ Wallet**  
+  `DELETE /api/wallets/:id`
+
+---
+
+### 🔹 Orders
+- **สร้างคำสั่งซื้อขาย**  
+  `POST /api/orders`
+  ```json
+  {
+    "userId": 1,
+    "cryptocurrencyId": 1,
+    "orderType": "buy",
+    "amount": 0.5,
+    "price": 49000
+  }
+  ```
+- **ดึงคำสั่งซื้อขายทั้งหมด**  
+  `GET /api/orders`
+- **อัปเดตคำสั่งซื้อขาย**  
+  `PUT /api/orders/:id`
+  ```json
+  {
+    "orderType": "sell",
+    "amount": 0.3
+  }
+  ```
+- **ลบคำสั่งซื้อขาย**  
+  `DELETE /api/orders/:id`
+
+---
+
+### 🔹 Transactions
+- **สร้างธุรกรรมโอนเหรียญ**  
+  `POST /api/transactions`
+  ```json
+{
+    "walletId": "1",
+    "amount": "75.25",
+    "type": "deposit",
+    "date": "2025-03-02T10:45:00Z"
+  }
+  ```
+- **ดึงธุรกรรมทั้งหมด**  
+  `GET /api/transactions`
+- **อัปเดตสถานะธุรกรรม**  
+  `PUT /api/transactions/:id`
+  ```json
+  {
+    "status": "completed"
+  }
+  ```
+- **ลบธุรกรรม**  
+  `DELETE /api/transactions/:id`
 
