@@ -1,9 +1,11 @@
 # Crypto Exchange 
 
+## ER Diagram
+![Crypto Exchange Preview](https://cdn.discordapp.com/attachments/1127802967274303498/1345328161730199616/crypto-exchange.drawio1.png?ex=67c425fc&is=67c2d47c&hm=9d189c4e710ed5dcf5ba74f7a71064508fa7d2487421e42b6ae6dcdda833332c&)
+
 ## รายละเอียดโปรเจค
 
 โปรเจคนี้เป็น **Crypto Exchange API** ที่พัฒนาด้วย **Node.js และ Express** โดยใช้ **Sequelize** เป็น ORM และจัดการฐานข้อมูลด้วย **SQLite/MySQL** ระบบถูกออกแบบตามโจทย์ที่กำหนดไว้เกี่ยวกับ **แพลตฟอร์มซื้อขายแลกเปลี่ยน Cryptocurrencies** โดยมีฟีเจอร์หลักดังนี้:
-![Crypto Exchange Preview](https://cdn.discordapp.com/attachments/1127802967274303498/1345328161730199616/crypto-exchange.drawio1.png?ex=67c425fc&is=67c2d47c&hm=9d189c4e710ed5dcf5ba74f7a71064508fa7d2487421e42b6ae6dcdda833332c&)
 - **การสร้างบัญชีผู้ใช้ (User Account Management)**
 - **การตั้งคำสั่งซื้อ-ขาย (Order Management) สำหรับ Cryptocurrencies เช่น BTC, ETH, XRP, DOGE**
 - **การจัดการกระเป๋าเงิน (Wallet) รองรับทั้งเงิน Fiat (THB, USD) และ Crypto**
@@ -16,31 +18,28 @@
 - **SQLite หรือ MySQL** สำหรับจัดเก็บข้อมูล
 - **dotenv** สำหรับการจัดการ environment variables
 
-## การติดตั้งและรันโปรเจค
-
-### 1. ติดตั้ง Dependencies
-```sh
+## วิธีการติดตั้งและรันโปรเจค
+### 1. Clone Repository
+```bash
+git clone https://github.com/HHTTTD/crypto-exchange.git
+cd crypto-exchange
+```
+### 2. ติดตั้ง Dependencies
+```bash
 npm install
 ```
-
-### 2. ตั้งค่าฐานข้อมูล
-
-- หากใช้ SQLite ไม่ต้องตั้งค่าเพิ่มเติม
-- หากใช้ MySQL ให้สร้างฐานข้อมูลและแก้ไขไฟล์ `.env` ให้ถูกต้อง
-
-### 3. รัน Migration และ Seed ข้อมูลตัวอย่าง
-```sh
-npx sequelize-cli db:migrate    # รัน Migration เพื่อสร้างตาราง
-npx sequelize-cli db:seed:all   # Seed ข้อมูลทดสอบ
+### 3. ตั้งค่าฐานข้อมูลและ Seed ข้อมูล
+```bash
+npx sequelize-cli db:migrate   # สร้างตารางฐานข้อมูล
+npx sequelize-cli db:seed:all  # เพิ่มข้อมูลทดสอบ
 ```
-
 ### 4. รันเซิร์ฟเวอร์
-```sh
+```bash
 npm start
 ```
+API Server จะรันที่ `http://localhost:3000`
 
-API จะรันที่ `http://localhost:3000`
-
+---
 ## API Routes
 
 | Method | Endpoint         | Description |
@@ -77,43 +76,42 @@ npx sequelize-cli db:seed:all        # Seed ข้อมูลทดสอบ
 npx sequelize-cli db:seed:undo:all   # ลบข้อมูลที่ Seed ไปทั้งหมด
 ```
 
-## ตัวอย่าง Seed Data
+## ตัวอย่าง API Endpoint
+### 1. สร้างบัญชีผู้ใช้
+**POST** `/api/users`
+```json
+{
+  "username": "newuser",
+  "email": "newuser@example.com",
+  "password": "securepassword"
+}
+```
 
-ไฟล์ตัวอย่างสำหรับ Seed ข้อมูล (`seeders/xxxx-user-seeder.js`):
-```js
-module.exports = {
-  up: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkInsert('Users', [
-      {
-        name: 'John Wick',
-        email: 'john@example.com',
-        password: 'password123',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      },
-      {
-        name: 'Jon Snow',
-        email: 'Jon@example.com',
-        password: 'password456',
-        createdAt: new Date(),
-        updatedAt: new Date()
-      }
-    ]);
-  },
+### 2. รับข้อมูล Cryptocurrencies
+**GET** `/api/cryptocurrencies`
 
-  down: async (queryInterface, Sequelize) => {
-    await queryInterface.bulkDelete('Users', null, {});
-  }
-};
+### 3. สร้างคำสั่งซื้อขาย
+**POST** `/api/orders`
+```json
+{
+  "userId": 1,
+  "cryptocurrencyId": 1,
+  "orderType": "buy",
+  "amount": 0.5,
+  "price": 49000
+}
+```
+
+### 4. โอนเหรียญไปยังภายนอกระบบ
+**POST** `/api/externalTransfers`
+```json
+{
+  "userId": 1,
+  "walletId": 1,
+  "amount": 0.1,
+  "destinationAddress": "3FZbgi29cpjq2GjdwV8eyHuJJnkLtktZc5"
+}
 ```
 
 ---
-
-โปรเจคนี้เป็นส่วนหนึ่งของ **โจทย์ข้อสอบ Backend** โดยอิงตามโจทย์ข้อที่ 1 และข้อที่ 2 ซึ่งครอบคลุมถึง:
-- การออกแบบฐานข้อมูลสำหรับระบบแลกเปลี่ยน Cryptocurrency ตาม ER Diagram
-- การพัฒนา API ด้วย Node.js หรือ PHP ที่รองรับ CRUD และความสัมพันธ์ของ Model
-- การเขียน Controller และ Routing สำหรับฟังก์ชันหลัก
-- การสร้างไฟล์ Seed ข้อมูลเพื่อใช้ในการทดสอบ
-
-หากมีข้อสงสัยหรือพบปัญหา สามารถแก้ไขโค้ดหรือสอบถามเพิ่มเติมได้!
 
