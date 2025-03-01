@@ -76,6 +76,7 @@ npx sequelize-cli db:seed:all        # Seed ข้อมูลทดสอบ
 npx sequelize-cli db:seed:undo:all   # ลบข้อมูลที่ Seed ไปทั้งหมด
 ```
 
+
 ## ตัวอย่าง API Endpoint
 
 ### 🔹 Users
@@ -158,7 +159,7 @@ npx sequelize-cli db:seed:undo:all   # ลบข้อมูลที่ Seed �
 - **สร้างธุรกรรมโอนเหรียญ**  
   `POST /api/transactions`
   ```json
-{
+  {
     "walletId": "1",
     "amount": "75.25",
     "type": "deposit",
