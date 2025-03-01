@@ -65,7 +65,7 @@ crypto-exchange/
 │── seeders/         # ข้อมูลตัวอย่างสำหรับทดสอบ
 │── server.js        # ไฟล์เริ่มต้นเซิร์ฟเวอร์
 │── package.json     # Dependencies และสคริปต์
-│── database.sqlite  # ไฟล์ฐานข้อมูล SQLite (ถ้าใช้ SQLite)
+│── database.sqlite  # ไฟล์ฐานข้อมูล SQLite 
 ```
 
 ## คำสั่งที่เกี่ยวข้องกับฐานข้อมูล
@@ -78,6 +78,9 @@ npx sequelize-cli db:seed:undo:all   # ลบข้อมูลที่ Seed �
 
 
 ## ตัวอย่าง API Endpoint
+
+### ทดสอบ API ด้วย Postman 
+<img height="30" src="https://raw.githubusercontent.com/marwin1991/profile-technology-icons/refs/heads/main/icons/postman.png">
 
 ### 🔹 Users
 - **สร้างบัญชีผู้ใช้**  
