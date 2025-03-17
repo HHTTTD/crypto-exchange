@@ -1,7 +1,7 @@
 # Crypto Exchange 
 
 ## ER Diagram
-![Crypto Exchange Preview](https://cdn.discordapp.com/attachments/1127802967274303498/1345328161730199616/crypto-exchange.drawio1.png?ex=67c425fc&is=67c2d47c&hm=9d189c4e710ed5dcf5ba74f7a71064508fa7d2487421e42b6ae6dcdda833332c&)
+![Crypto Exchange Preview]([https://cdn.discordapp.com/attachments/1127802967274303498/1345328161730199616/crypto-exchange.drawio1.png?ex=67c425fc&is=67c2d47c&hm=9d189c4e710ed5dcf5ba74f7a71064508fa7d2487421e42b6ae6dcdda833332c&](https://cdn.discordapp.com/attachments/1127802967274303498/1345328161730199616/crypto-exchange.drawio1.png?ex=67d8953c&is=67d743bc&hm=87192a05ab81bab2b66279577e53e91ee98be80f5827b225f1987c01efaf6ce5&))
 
 ## รายละเอียดโปรเจค
 
